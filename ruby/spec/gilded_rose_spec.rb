@@ -1,39 +1,40 @@
 require 'gilded_rose'
 
+def enter_item(name, sell_in, quality)
+  @items = [Item.new(name, sell_in, quality)]
+  GildedRose.new(@items).update_quality()
+end
+
+
 describe GildedRose do
   describe '#update_quality' do
     it 'does not change the name' do
-      items = [Item.new('foo', 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq 'foo'
+      enter_item('foo', 0, 0)
+      expect(@items[0].name).to eq 'foo'
     end
 
     context 'normal items' do
       context 'postive sell_in value' do
         it 'decreases quality by 1' do
-          items = [Item.new('foo', 10, 20)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 19
+          enter_item('foo', 10, 20)
+          expect(@items[0].quality).to eq 19
         end
 
         it 'quality of item is never negative' do
-          items = [Item.new('foo', 1, 0)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 0
+          enter_item('foo', 1, 0)
+          expect(@items[0].quality).to eq 0
         end
       end
 
       context 'negative sell_in value' do
         it 'decreases quality by 2' do
-          items = [Item.new('foo', 0, 6)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 4
+          enter_item('foo', 0, 6)
+          expect(@items[0].quality).to eq 4
         end
 
         it 'quality of item is never negative' do
-          items = [Item.new('foo', 0, 0)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 0
+          enter_item('foo', 0, 0)
+          expect(@items[0].quality).to eq 0
         end
       end
     end
@@ -41,29 +42,25 @@ describe GildedRose do
     context 'Aged Brie' do
       context 'postive sell_in value' do
         it 'increases quality by 1' do
-          items = [Item.new('Aged Brie', 1, 6)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 7
+          enter_item('Aged Brie', 1, 6)
+          expect(@items[0].quality).to eq 7
         end
 
         it 'quality is never more than 50' do
-          items = [Item.new('Aged Brie', 1, 49)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 50
+          enter_item('Aged Brie', 1, 49)
+          expect(@items[0].quality).to eq 50
         end
       end
 
       context 'negative sell_in value' do
         it 'increases quality by 2' do
-          items = [Item.new('Aged Brie', 0, 6)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 8
+          enter_item('Aged Brie', 0, 6)
+          expect(@items[0].quality).to eq 8
         end
 
         it 'quality is never more than 50' do
-          items = [Item.new('Aged Brie', 0, 49)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 50
+          enter_item('Aged Brie', 0, 49)
+          expect(@items[0].quality).to eq 50
         end
       end
     end
@@ -71,9 +68,8 @@ describe GildedRose do
     context 'Bakstage Passes' do
       context 'sell_in value of 15'
       it 'quality increases by 1' do
-        items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 15, 10)]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to eq 11
+        enter_item('Backstage passes to a TAFKAL80ETC concert', 15, 10)
+        expect(@items[0].quality).to eq 11
       end
     end
   end
