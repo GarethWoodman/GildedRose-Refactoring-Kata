@@ -60,7 +60,7 @@ describe GildedRose do
         enter_item('Backstage passes to a TAFKAL80ETC concert', 1, 50)
         expect(@items[0].quality).to eq 50
       end
-      
+
       it 'quality increases by 1 if sell_in value is 15' do
         enter_item('Backstage passes to a TAFKAL80ETC concert', 15, 10)
         expect(@items[0].quality).to eq 11
