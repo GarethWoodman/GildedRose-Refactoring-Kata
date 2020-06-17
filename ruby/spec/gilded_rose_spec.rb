@@ -17,6 +17,13 @@ describe GildedRose do
           expect(items[0].sell_in).to eq 9
           expect(items[0].quality).to eq 19
         end
+
+        it "quality of item is never negative" do
+          items = [Item.new("foo", 1, 0)]
+          GildedRose.new(items).update_quality()
+          expect(items[0].sell_in).to eq 0
+          expect(items[0].quality).to eq 0
+        end
       end
 
       context 'negative sell_in value' do
