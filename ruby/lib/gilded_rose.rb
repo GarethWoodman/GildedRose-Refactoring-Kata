@@ -42,6 +42,9 @@ class GildedRose
   end
 
   def conjured(item)
+    item.sell_in.positive? ? (item.quality -= 2) : (item.quality -= 4)
+    item.quality = 0 unless item.quality.positive?
+    item.sell_in -= 1
   end
 end
 

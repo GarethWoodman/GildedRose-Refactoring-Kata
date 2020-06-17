@@ -100,5 +100,31 @@ describe GildedRose do
         expect(@items[0].quality).to eq 80
       end
     end
+
+    context 'Conjured items' do
+      context 'postive sell_in value' do
+        it 'decreases quality by 2' do
+          enter_item('Conjured', 10, 20)
+          expect(@items[0].quality).to eq 18
+        end
+
+        it 'quality of item is never negative' do
+          enter_item('Conjured', 1, 0)
+          expect(@items[0].quality).to eq 0
+        end
+      end
+
+      context 'negative sell_in value' do
+        it 'decreases quality by 4' do
+          enter_item('Conjured', 0, 6)
+          expect(@items[0].quality).to eq 2
+        end
+
+        it 'quality of item is never negative' do
+          enter_item('Conjured', 0, 0)
+          expect(@items[0].quality).to eq 0
+        end
+      end
+    end
   end
 end
