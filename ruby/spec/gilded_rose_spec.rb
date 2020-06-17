@@ -80,6 +80,11 @@ describe GildedRose do
         enter_item('Backstage passes to a TAFKAL80ETC concert', 5, 10)
         expect(@items[0].quality).to eq 13
       end
+
+      it 'quality decreases to 0 if sell_in value is 0' do
+        enter_item('Backstage passes to a TAFKAL80ETC concert', 0, 10)
+        expect(@items[0].quality).to eq 0
+      end
     end
   end
 end
