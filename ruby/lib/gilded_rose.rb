@@ -14,8 +14,8 @@ class GildedRose
   private
 
   def check_item(item)
+    return                        if item.name.include? 'Sulfuras'
     return aged_brie(item)        if item.name.include? 'Aged Brie'
-    return legendary(item)        if item.name.include? 'Sulfuras'
     return conjured(item)         if item.name.include? 'Conjured'
     return backstage_passes(item) if item.name.include? 'Backstage passes'
     normal(item)
@@ -34,9 +34,11 @@ class GildedRose
   end
 
   def backstage_passes(item)
-  end
-
-  def legendary(item)
+    item.quality += 1 if item.sell_in > 10
+    item.quality += 2 if item.sell_in > 5 && item.sell_in <= 10
+    item.quality += 3 if item.sell_in > 0 && item.sell_in <= 5
+    item.quality = 0 if item.sell_in <= 0
+    item.sell_in -= 1
   end
 
   def conjured(item)
