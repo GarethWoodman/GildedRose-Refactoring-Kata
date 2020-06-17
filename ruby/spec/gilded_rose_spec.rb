@@ -66,10 +66,18 @@ describe GildedRose do
     end
 
     context 'Bakstage Passes' do
-      context 'sell_in value of 15'
-      it 'quality increases by 1' do
-        enter_item('Backstage passes to a TAFKAL80ETC concert', 15, 10)
-        expect(@items[0].quality).to eq 11
+      context 'sell_in value of 15' do
+        it 'quality increases by 1' do
+          enter_item('Backstage passes to a TAFKAL80ETC concert', 15, 10)
+          expect(@items[0].quality).to eq 11
+        end
+      end
+
+      context 'sell_in value of 10' do
+        it 'quality increases by 2' do
+          enter_item('Backstage passes to a TAFKAL80ETC concert', 10, 10)
+          expect(@items[0].quality).to eq 12
+        end
       end
     end
   end
