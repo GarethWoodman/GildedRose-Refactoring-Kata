@@ -19,11 +19,6 @@ describe GildedRose do
           enter_item('foo', 10, 20)
           expect(@items[0].quality).to eq 19
         end
-
-        it 'quality of item is never negative' do
-          enter_item('foo', 1, 0)
-          expect(@items[0].quality).to eq 0
-        end
       end
 
       context 'negative sell_in value' do
@@ -31,11 +26,11 @@ describe GildedRose do
           enter_item('foo', 0, 6)
           expect(@items[0].quality).to eq 4
         end
+      end
 
-        it 'quality of item is never negative' do
-          enter_item('foo', 0, 0)
-          expect(@items[0].quality).to eq 0
-        end
+      it 'quality of item is never negative' do
+        enter_item('foo', 1, 0)
+        expect(@items[0].quality).to eq 0
       end
     end
 
@@ -45,11 +40,6 @@ describe GildedRose do
           enter_item('Aged Brie', 1, 6)
           expect(@items[0].quality).to eq 7
         end
-
-        it 'quality is never more than 50' do
-          enter_item('Aged Brie', 1, 49)
-          expect(@items[0].quality).to eq 50
-        end
       end
 
       context 'negative sell_in value' do
@@ -57,15 +47,20 @@ describe GildedRose do
           enter_item('Aged Brie', 0, 6)
           expect(@items[0].quality).to eq 8
         end
+      end
 
-        it 'quality is never more than 50' do
-          enter_item('Aged Brie', 0, 49)
-          expect(@items[0].quality).to eq 50
-        end
+      it 'quality is never more than 50' do
+        enter_item('Aged Brie', 1, 49)
+        expect(@items[0].quality).to eq 50
       end
     end
 
     context 'Bakstage Passes' do
+      it 'quality is never more than 50' do
+        enter_item('Backstage passes to a TAFKAL80ETC concert', 1, 50)
+        expect(@items[0].quality).to eq 50
+      end
+      
       it 'quality increases by 1 if sell_in value is 15' do
         enter_item('Backstage passes to a TAFKAL80ETC concert', 15, 10)
         expect(@items[0].quality).to eq 11
@@ -107,11 +102,6 @@ describe GildedRose do
           enter_item('Conjured', 10, 20)
           expect(@items[0].quality).to eq 18
         end
-
-        it 'quality of item is never negative' do
-          enter_item('Conjured', 1, 0)
-          expect(@items[0].quality).to eq 0
-        end
       end
 
       context 'negative sell_in value' do
@@ -119,11 +109,11 @@ describe GildedRose do
           enter_item('Conjured', 0, 6)
           expect(@items[0].quality).to eq 2
         end
+      end
 
-        it 'quality of item is never negative' do
-          enter_item('Conjured', 0, 0)
-          expect(@items[0].quality).to eq 0
-        end
+      it 'quality of item is never negative' do
+        enter_item('Conjured', 1, 0)
+        expect(@items[0].quality).to eq 0
       end
     end
   end

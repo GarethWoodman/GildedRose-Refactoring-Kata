@@ -6,30 +6,27 @@ class GildedRose
   end
 
   def update_quality()
-    @items.each do |item|
-      check_item(item)
-    end
+    @items.each { |item| check_item(item) unless item.name.include?('Sulfuras') }
   end
 
   private
 
   def check_item(item)
-    return                        if item.name.include? 'Sulfuras'
-    return aged_brie(item)        if item.name.include? 'Aged Brie'
-    return conjured(item)         if item.name.include? 'Conjured'
-    return backstage_passes(item) if item.name.include? 'Backstage passes'
-    normal(item)
+    return aged_brie(item)        if item.name.include?('Aged Brie')
+    return backstage_passes(item) if item.name.include?('Backstage passes')
+    other(item)
   end
 
-  def normal(item)
-    item.sell_in.positive? ? (item.quality -= 1) : (item.quality -= 2)
+  def other(item)
+    item.name.include?('Conjured') ? i = 2 : i = 1
+    item.sell_in.positive? ? (item.quality -= 1 * i) : (item.quality -= 2 * i)
     item.quality = 0 unless item.quality.positive?
     item.sell_in -= 1
   end
 
   def aged_brie(item)
     item.sell_in.positive? ? (item.quality += 1) : (item.quality += 2)
-    item.quality = 50 if item.quality > 50
+    max_quality?(item)
     item.sell_in -= 1
   end
 
@@ -38,13 +35,12 @@ class GildedRose
     item.quality += 2 if item.sell_in > 5 && item.sell_in <= 10
     item.quality += 3 if item.sell_in > 0 && item.sell_in <= 5
     item.quality = 0 if item.sell_in <= 0
+    max_quality?(item)
     item.sell_in -= 1
   end
 
-  def conjured(item)
-    item.sell_in.positive? ? (item.quality -= 2) : (item.quality -= 4)
-    item.quality = 0 unless item.quality.positive?
-    item.sell_in -= 1
+  def max_quality?(item)
+    item.quality = 50 if item.quality > 50
   end
 end
 
