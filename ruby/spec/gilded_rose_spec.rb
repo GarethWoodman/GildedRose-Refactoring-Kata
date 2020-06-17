@@ -86,5 +86,19 @@ describe GildedRose do
         expect(@items[0].quality).to eq 0
       end
     end
+
+    context 'Legendary items' do
+      it 'sell_in and quanity do not change if sell_in value is positive' do
+        enter_item('Sulfuras, Hand of Ragnaros', 10, 80)
+        expect(@items[0].sell_in).to eq 10
+        expect(@items[0].quality).to eq 80
+      end
+
+      it 'sell_in and quanity do not change if sell_in value is negative' do
+        enter_item('Sulfuras, Hand of Ragnaros', -1, 80)
+        expect(@items[0].sell_in).to eq -1
+        expect(@items[0].quality).to eq 80
+      end
+    end
   end
 end
