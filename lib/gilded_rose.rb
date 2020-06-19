@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'item'
 
 class GildedRose
@@ -5,9 +7,10 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       item.name.include?('Sulfuras') ? next : check_item(item)
+
       quality_check_process(item)
     end
   end
@@ -17,11 +20,12 @@ class GildedRose
   def check_item(item)
     return aged_brie(item)        if item.name.include?('Aged Brie')
     return backstage_passes(item) if item.name.include?('Backstage passes')
+
     other(item)
   end
 
   def other(item)
-    item.name.include?('Conjured') ? i = 2 : i = 1
+    i = item.name.include?('Conjured') ? 2 : 1
     item.sell_in.positive? ? (item.quality -= 1 * i) : (item.quality -= 2 * i)
   end
 
@@ -32,7 +36,7 @@ class GildedRose
   def backstage_passes(item)
     item.quality += 1 if item.sell_in > 10
     item.quality += 2 if item.sell_in > 5 && item.sell_in <= 10
-    item.quality += 3 if item.sell_in > 0 && item.sell_in <= 5
+    item.quality += 3 if item.sell_in.positive? && item.sell_in <= 5
     item.quality = 0 if item.sell_in <= 0
   end
 

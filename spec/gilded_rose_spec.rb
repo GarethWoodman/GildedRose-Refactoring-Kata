@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'gilded_rose'
 
 def enter_item(name, sell_in, quality)
   @items = [Item.new(name, sell_in, quality)]
-  GildedRose.new(@items).update_quality()
+  GildedRose.new(@items).update_quality
 end
-
 
 describe GildedRose do
   describe '#update_quality' do
@@ -91,7 +92,7 @@ describe GildedRose do
 
       it 'sell_in and quanity do not change if sell_in value is negative' do
         enter_item('Sulfuras, Hand of Ragnaros', -1, 80)
-        expect(@items[0].sell_in).to eq -1
+        expect(@items[0].sell_in).to eq(-1)
         expect(@items[0].quality).to eq 80
       end
     end

@@ -3,12 +3,13 @@
     "coverage": {
       "/Users/garethwoodman/Desktop/Makers Academy/Projects/GildedRose-Refactoring-Kata/spec/gilded_rose_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
           17,
           17,
-          null,
           null,
           null,
           1,
@@ -127,6 +128,8 @@
       },
       "/Users/garethwoodman/Desktop/Makers Academy/Projects/GildedRose-Refactoring-Kata/lib/gilded_rose.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -137,6 +140,7 @@
           1,
           17,
           17,
+          null,
           15,
           null,
           null,
@@ -146,6 +150,7 @@
           1,
           15,
           12,
+          null,
           7,
           null,
           null,
@@ -175,6 +180,8 @@
       },
       "/Users/garethwoodman/Desktop/Makers Academy/Projects/GildedRose-Refactoring-Kata/lib/item.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
@@ -191,6 +198,6 @@
         ]
       }
     },
-    "timestamp": 1592560776
+    "timestamp": 1592561200
   }
 }
