@@ -1,4 +1,4 @@
-# Bank - Tech Test
+# GildedRose Refactoring Kata
 
 ## Specification
 * [GildedRose-Refactoring-Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/master/README.md)
